@@ -1,2 +1,1 @@
-# OQS
-Online queue system project
+# JavaTechProject
