@@ -41,6 +41,14 @@ public class ScheduleDAO {
         return result;
     }
 
+    public List<Schedule> getScheduleListByMasterId(long masterId) {
+        TypedQuery<Schedule> query = entityManager.createQuery(
+                "select s from Schedule s where s.master.id=" + masterId, Schedule.class
+        );
+        List<Schedule> result = query.getResultList();
+        return result;
+    }
+
     public List<Time> getTimeListByMasterAndDate(long masterId, Date date) {
         Query query = entityManager.createQuery(
                 "select s.time from Schedule s where s.master.id=" + masterId + " and s.date='" + date + "'");
