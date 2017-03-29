@@ -323,7 +323,7 @@
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
                             <div id="success"></div>
-                            <button type="submit" class="btn btn-xl">Send Message</button>
+                            <button type="submit" id="send-msg-btn" class="btn btn-xl">Send Message</button>
                         </div>
                     </div>
                 </form>
@@ -336,7 +336,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <span class="copyright">Copyright &copy; Your Website 2016</span>
+                <span class="copyright">Copyright &copy; Online queue system 2016</span>
             </div>
             <div class="col-md-4">
                 <ul class="list-inline social-buttons">

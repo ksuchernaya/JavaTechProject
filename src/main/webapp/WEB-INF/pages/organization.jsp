@@ -131,87 +131,30 @@
                 <input type="button" class="btn btn-lg btn-success" style="width: 200px; margin-left: 100px"
                        id="save-master-service" value="Save changes">
             </div>
-
+            <br>
+            <div class="mastersSchedule" style="min-height: 50px">
+                <span class="simple-text" style="margin-bottom: 20px; float: left">Master's schedule: </span>
+                <select id="mastersScheduleDropDown" class="form-control input-md"
+                        style="float: left; width: 200px; margin-left: 10px">
+                    <option value="0" selected="true">-- Choose master --</option>
+                    <c:forEach items="${allMasters}" var="master">
+                        <option value="${master.id}">${master.name}</option>
+                    </c:forEach>
+                </select>
+                <table id="mastersScheduleTable" class="sortable table table-bordered"
+                       style="background-color: rgba(216, 191, 216, 0.8); margin-left: 50px; width: 90%; display: none">
+                    <th></th>
+                </table>
+            </div>
 
             <br>
             <jsp:include page="fragments/change-password.jsp"/>
         </c:if>
     </div>
-
-    <%--=======================================================================================================--%>
-
-
-    <p>
-        Master's schedule:
-        <select id="mastersScheduleDropDown">
-            <c:forEach items="${allMasters}" var="master">
-                <option value="${master.id}">${master.name}</option>
-            </c:forEach>
-        </select>
-    </p>
-
-    <table id="mastersScheduleTable" class="sortable" style="display: none"></table>
-    <%--услуга, дата-время, почта юзера--%>
-
-    <script>
-        $("#mastersScheduleDropDown").change(function () {
-                    var masterId = $(this).val();
-                    alert(masterId)
-                    $.ajax({
-                        type: "GET",
-                        url: 'masters-schedule',
-                        data: "masterId=" + masterId,
-                        success: function (data) {
-                            $("#mastersScheduleTable tr").remove();
-                            var table = document.getElementById("mastersScheduleTable");
-                            var tr = document.createElement('tr');
-                            var thService, thDate, thEmail;
-                            appendTh(tr, thService, "Service");
-                            appendTh(tr, thDate, "Date");
-                            appendTh(tr, thEmail, "Email");
-                            table.tHead.appendChild(tr);
-//                            for (var i = 0; i < data.length; i++) {
-//                                tr = document.createElement('tr');
-//                                td = document.createElement('td');
-////                                td.innerHTML = ;
-//                                tr.appendChild(td);
-//                                var tdType = document.createElement('td');
-//
-//                                //TODO data[i].type.id
-//                                tdType.innerHTML = data[i].type;
-//                                tr.appendChild(tdType);
-//                                var tdAddress = document.createElement('td');
-//                                tdAddress.innerHTML = data[i].address;
-//                                tr.appendChild(tdAddress);
-//                                var tdPhone = document.createElement('td');
-//                                tdPhone.innerHTML = data[i].phone;
-//                                tr.appendChild(tdPhone);
-//                                table.tBodies[0].appendChild(tr);
-//                            }
-                        },
-                        error: function (xhr, textStatus) {
-                            alert([xhr.status, textStatus]);
-                        }
-                    })
-                }
-        );
-
-        function appendTh(tr, th, name) {
-            th = document.createElement('th');
-            th.innerHTML = name;
-            tr.appendChild(th);
-        }
-    </script>
-
-
     <br>
     <br>
     <br>
     <br>
-
-    <%--=======================================================================================================--%>
-
-
     <jsp:include page="fragments/footer.jsp"/>
 </div>
 <%--показать чекбоксы для сервиса--%>
@@ -505,6 +448,55 @@
         })
     });
 </script>
+<%--показать расписание для мастера--%>
+<script>
+    $("#mastersScheduleDropDown").change(function () {
+                var masterId = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: '/masters-schedule',
+                    data: "masterId=" + masterId,
+                    success: function (data) {
+                        $("#mastersScheduleTable tr").remove();
+                        var table = document.getElementById("mastersScheduleTable");
+                        if (data.length != 0) {
+                            table.style.display = "block";
+                            var tr = document.createElement('tr');
+                            var thService, thDate, thEmail;
+                            appendTh(tr, thService, "Service");
+                            appendTh(tr, thDate, "Date");
+                            appendTh(tr, thEmail, "Email");
+                            table.tHead.appendChild(tr);
+                            for (var i = 0; i < data.length; i++) {
+                                tr = document.createElement('tr');
+                                var tdService = document.createElement('td');
+                                tdService.innerHTML = data[i].simpleService;
+                                tr.appendChild(tdService);
+                                var tdDate = document.createElement('td');
+                                tdDate.innerHTML = data[i].simpleDate;
+                                tr.appendChild(tdDate);
+                                var tdEmail = document.createElement('td');
+                                tdEmail.innerHTML = data[i].simpleUser;
+                                tr.appendChild(tdEmail);
+                                table.tBodies[0].appendChild(tr);
+                            }
+                        } else {
+                            table.style.display = "none";
+                        }
 
+                    },
+                    error: function (xhr, textStatus) {
+                        alert([xhr.status, textStatus]);
+                    }
+                })
+            }
+    );
+
+    function appendTh(tr, th, name) {
+        th = document.createElement('th');
+        th.innerHTML = name;
+        tr.appendChild(th);
+    }
+</script>
 </body>
 </html>

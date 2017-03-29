@@ -47,8 +47,8 @@
 <form class="registration-form" id="registration-form" action="/registration" method="post"
       onsubmit="return validateForm()">
 
-    <p><input type="email" class="form-control input-lg" name="email" placeholder="email" onblur="validateEmail()"
-              onkeyup="checkEmailInDB()"/></p>
+
+    <p><input type="email" class="form-control input-lg" name="email" placeholder="email" onblur="validateEmail()" onkeyup="checkEmailInDB()"/></p>
     <span class="error-msg" id="invalid-email"></span>
 
 
@@ -60,27 +60,28 @@
         <span style="font-size: 20px;">&nbsp;user&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;</span></p>
     <p><input type="radio" id="radio_business" name="role" value="ROLE_BUSINESS" onclick="check()">
         <span style="font-size: 20px;">&nbsp;business</span></p>
-    <span class="error-msg" id="invalid-type" style="color:red;"></span>
+    <span class="error-msg" id="invalid-role" style="color:red;"></span>
 
     <p><input type="tel" class="form-control input-lg" name="phone"
               onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode==45'
-              placeholder="phone"/></p>
+              placeholder="phone" maxlength="200"/></p>
     <div id="user" style="display: none">
-        <p><input type="text" class="form-control input-lg" name="firstname" placeholder="firstname"/></p>
-        <p><input type="text" class="form-control input-lg" name="lastname" placeholder="lastname"/></p>
+        <p><input type="text" class="form-control input-lg" name="firstname" placeholder="firstname" maxlength="200"/></p>
+        <p><input type="text" class="form-control input-lg" name="lastname" placeholder="lastname" maxlength="200"/></p>
     </div>
     <div id="business" style="display: none">
-        <p><input type="text" class="form-control input-lg" name="name" placeholder="name"/></p>
+        <p><input type="text" class="form-control input-lg" name="name" placeholder="name" maxlength="200"/></p>
         <p><select class="form-control input-lg" id="typeComboBoxId" name="typeComboBoxName">
             <option value="" disabled selected>-- Select type --</option>
             <c:forEach items="${types}" var="type">
                 <option value="${type.name}" style="font-size: 20px;">${type.name}</option>
             </c:forEach>
         </select></p>
-        <p><input type="text" class="form-control input-lg" name="address" placeholder="address"/></p>
-        <p><textarea class="form-control input-lg" name="description" rows="3" placeholder="description"></textarea></p>
+        <span class="error-msg" id="invalid-type" style="color:red;"></span>
+        <p><input type="text" class="form-control input-lg" name="address" placeholder="address" maxlength="200"/></p>
+        <p><textarea style="resize: none" class="form-control input-lg" name="description" rows="3" placeholder="description" maxlength="1000"></textarea></p>
     </div>
-    <input type="submit" class="btn btn-lg btn-success" value="  Sign up  "/>
+    <input type="submit" id="sign-up-btn" class="btn btn-lg btn-success" value="  Sign up  "/>
 </form>
 <jsp:include page="fragments/footer.jsp"/>
 </body>

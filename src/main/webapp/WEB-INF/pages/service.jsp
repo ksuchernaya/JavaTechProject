@@ -42,7 +42,7 @@
             </c:forEach>
         </select>
 
-        <p>Date: <input type="text" id="datepicker" class="datepicker" name="dateName" readonly></p>
+        <p>Date: <input  type="text" id="datepicker" class="datepicker" name="dateName" readonly></p>
 
 
 

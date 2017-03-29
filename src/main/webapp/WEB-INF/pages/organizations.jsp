@@ -54,21 +54,21 @@
                             tr = document.createElement('tr');
                             var a = document.createElement('a');
                             var td = document.createElement('td');
-                            a.innerHTML = data[i].name;
+                            a.innerHTML = data[i].smplName;
                             a.style.color = "blue";
                             td.appendChild(a);
-                            a.href = "/organization/" + data[i].id;
+                            a.href = "/organization/" + data[i].smplId;
                             tr.appendChild(td);
                             var tdType = document.createElement('td');
 
                             //TODO data[i].type.id
-                            tdType.innerHTML = data[i].type; //PROBLEMS WITH data[i].type.name !!! don't work, data[i].type = undefined
+                            tdType.innerHTML = data[i].smplType; //PROBLEMS WITH data[i].type.name !!! don't work, data[i].type = undefined
                             tr.appendChild(tdType);
                             var tdAddress = document.createElement('td');
-                            tdAddress.innerHTML = data[i].address;
+                            tdAddress.innerHTML = data[i].smplAddress;
                             tr.appendChild(tdAddress);
                             var tdPhone = document.createElement('td');
-                            tdPhone.innerHTML = data[i].phone;
+                            tdPhone.innerHTML = data[i].smplTelephone;
                             tr.appendChild(tdPhone);
                             table.tBodies[0].appendChild(tr);
                         }
