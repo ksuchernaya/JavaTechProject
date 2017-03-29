@@ -55,6 +55,7 @@ public class Schedule {
         this.master = master;
     }
 
+
     public Schedule() {
     }
 
@@ -130,6 +131,11 @@ public class Schedule {
         this.master = master;
     }
 
+    public SimpleUser getSimpleUser(Schedule s){
+        SimpleUser user = new SimpleUser(s);
+        return user;
+    }
+
     @Override
     public String toString() {
         return "Schedule{" +
@@ -143,5 +149,42 @@ public class Schedule {
                 ", service=" + service +
                 ", master=" + master +
                 '}';
+    }
+     public class SimpleUser{
+        private Date simpleDate;
+        private String simpleUser;
+        private String simpleService;
+
+
+        public SimpleUser(Schedule s){
+            simpleDate = s.getDate();
+            simpleService = s.getService().getName();
+            simpleUser = s.getUser().getEmail();
+        }
+
+
+        public Date getSimpleDate() {
+            return simpleDate;
+        }
+
+        public void setSimpleDate(Date simpleDate) {
+            this.simpleDate = simpleDate;
+        }
+
+        public String getSimpleUser() {
+            return simpleUser;
+        }
+
+        public void setSimpleUser(String simpleUser) {
+            this.simpleUser = simpleUser;
+        }
+
+        public String getSimpleService() {
+            return simpleService;
+        }
+
+        public void setSimpleService(String simpleService) {
+            this.simpleService = simpleService;
+        }
     }
 }

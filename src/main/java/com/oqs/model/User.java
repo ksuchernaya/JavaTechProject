@@ -206,6 +206,11 @@ public class User {
         this.schedules2 = schedules2;
     }
 
+    public SimpleUser getSmplUser(User u){
+        SimpleUser su = new SimpleUser(u);
+        return su;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -225,5 +230,61 @@ public class User {
                 ", schedules=" + schedules +
                 ", schedules2=" + schedules2 +
                 '}';
+    }
+
+    public class SimpleUser{
+        private long smplId;
+        private String smplName;
+        private String smplType;
+        private String smplAddress;
+        private String smplTelephone;
+
+        public SimpleUser(User user){
+            smplId = user.getId();
+            smplName = user.getName();
+            smplType = user.getType().getName();
+            smplAddress = user.getAddress();
+            smplTelephone = user.getPhone();
+        }
+
+        public long getSmplId() {
+            return smplId;
+        }
+
+        public void setSmplId(long smplId) {
+            this.smplId = smplId;
+        }
+
+        public String getSmplName() {
+            return smplName;
+        }
+
+        public void setSmplName(String smplName) {
+            this.smplName = smplName;
+        }
+
+        public String getSmplType() {
+            return smplType;
+        }
+
+        public void setSmplType(String smplType) {
+            this.smplType = smplType;
+        }
+
+        public String getSmplAddress() {
+            return smplAddress;
+        }
+
+        public void setSmplAddress(String smplAddress) {
+            this.smplAddress = smplAddress;
+        }
+
+        public String getSmplTelephone() {
+            return smplTelephone;
+        }
+
+        public void setSmplTelephone(String smplTelephone) {
+            this.smplTelephone = smplTelephone;
+        }
     }
 }

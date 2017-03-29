@@ -22,6 +22,7 @@ public class Type {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "type", cascade = CascadeType.ALL)
     private Collection<User> users = new ArrayList<User>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
     private Collection<Service> services = new ArrayList<Service>();
 
