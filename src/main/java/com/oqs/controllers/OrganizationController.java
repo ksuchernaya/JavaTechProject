@@ -3,6 +3,7 @@ package com.oqs.controllers;
 import com.oqs.crud.*;
 import com.oqs.model.Master;
 import com.oqs.model.Schedule;
+import com.oqs.model.*;
 import com.oqs.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -52,9 +54,13 @@ public class OrganizationController {
 
     @RequestMapping(value = "/organizations-sort-by", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> organizationsBySort(@RequestParam("typeId") String typeId) {
+    public List<User.SimpleUser> organizationsBySort(@RequestParam("typeId") String typeId) {
         List<User> organizationList = userDAO.getBsnListByType(typeId);
-        return organizationList;
+        List<User.SimpleUser> su = new ArrayList<User.SimpleUser>();
+        for(User u: organizationList){
+            su.add(u.getSmplUser(u));
+        }
+        return su;
     }
 
     @RequestMapping(value = "/organization/{organizationId}", method = RequestMethod.GET)
@@ -114,8 +120,13 @@ public class OrganizationController {
 
     @RequestMapping(value = "/masters-schedule", method = RequestMethod.GET)
     @ResponseBody
-    public void showMastersSchedule(@PathVariable("masterId") long masterId) {
-        System.out.println(masterId);
+    public List<Schedule.SimpleUser> showMastersSchedule(@RequestParam("masterId") long masterId) {
+        List<Schedule> list = scheduleDAO.getScheduleListByMasterId(masterId);
+        List<Schedule.SimpleUser> smpl = new ArrayList<Schedule.SimpleUser>();
+        for (Schedule s:list){
+            smpl.add(s.getSimpleUser(s));
+        }
+        return smpl;
     }
 
 }

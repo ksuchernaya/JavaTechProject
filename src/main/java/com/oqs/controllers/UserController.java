@@ -126,7 +126,7 @@ public class UserController {
             userDAO.getUserIdByUsername(email);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Пользователь не найден");
             return false;
         }
     }
